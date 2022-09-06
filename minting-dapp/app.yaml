@@ -1,0 +1,38 @@
+untime: nodejs16
+entrypoint: yarn start
+env_variables:
+  BUCKET_NAME: "mintdapp"
+handlers: 
+# Serve all static files with url ending with a file extension
+- url: /(.*\.js)
+  mime_type: text/javascript
+  static_files: public/build/\1
+  upload: public/build/(.*\.js) 
+
+- url: /(.*\.json)
+  mime_type: application/json
+  static_files: public/build/\1
+  upload: build/(.*\.json)
+  expiration: "1h"
+
+- url: /(.*\.css)
+  mime_type: text/css
+  static_files: public/build/\1
+  upload: public/build/(.*\.css)
+
+# Serve all static images with url ending with a image extension  
+- url: /(.*\.png)
+  mime_type: image/png
+  static_files: public/build/images/\1
+  upload: public/build/images/(.*\.png)
+  expiration: "7d"  
+
+- url: /fav.png
+  mime_type: image/png
+  static_files: public/build/images/fav.png
+  upload: public/build/images/fav.png
+
+# Catch all handler to index.html
+- url: /.*
+  static_files: public/index.html
+  upload: public/index.html
