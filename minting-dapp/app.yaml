@@ -1,4 +1,4 @@
-untime: nodejs16
+runtime: nodejs16
 entrypoint: yarn start
 env_variables:
   BUCKET_NAME: "mintdapp"
